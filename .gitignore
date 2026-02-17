@@ -1,0 +1,11 @@
+.env
+.env.local
+target/
+*.swp
+*.swo
+*~
+.DS_Store
+Cargo.lock
+*.log
+/benches/target/
+/target/

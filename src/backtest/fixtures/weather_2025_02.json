@@ -1,0 +1,50 @@
+[
+  {
+    "timestamp": "2025-02-01T06:00:00",
+    "gridpoint": "OKX/35,97",
+    "forecast_high_f": 72,
+    "forecast_low_f": 45,
+    "pm_bucket_label": "70-74F",
+    "pm_yes_price": 0.35
+  },
+  {
+    "timestamp": "2025-02-03T06:00:00",
+    "gridpoint": "OKX/35,97",
+    "forecast_high_f": 68,
+    "forecast_low_f": 42,
+    "pm_bucket_label": "65-69F",
+    "pm_yes_price": 0.4
+  },
+  {
+    "timestamp": "2025-02-05T06:00:00",
+    "gridpoint": "OKX/35,97",
+    "forecast_high_f": 55,
+    "forecast_low_f": 33,
+    "pm_bucket_label": "55-59F",
+    "pm_yes_price": 0.28
+  },
+  {
+    "timestamp": "2025-02-07T06:00:00",
+    "gridpoint": "OKX/35,97",
+    "forecast_high_f": 80,
+    "forecast_low_f": 58,
+    "pm_bucket_label": "80-84F",
+    "pm_yes_price": 0.22
+  },
+  {
+    "timestamp": "2025-02-10T06:00:00",
+    "gridpoint": "FWD/32,97",
+    "forecast_high_f": 65,
+    "forecast_low_f": 40,
+    "pm_bucket_label": "65-69F",
+    "pm_yes_price": 0.45
+  },
+  {
+    "timestamp": "2025-02-14T06:00:00",
+    "gridpoint": "FWD/32,97",
+    "forecast_high_f": 78,
+    "forecast_low_f": 55,
+    "pm_bucket_label": "75-79F",
+    "pm_yes_price": 0.3
+  }
+]

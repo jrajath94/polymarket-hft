@@ -1,0 +1,14 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+  scrape_timeout: 10s
+
+scrape_configs:
+  - job_name: "polymarket-hft"
+    static_configs:
+      - targets: ["polymarket-hft:9090"]
+        labels:
+          instance: "hft-engine"
+          environment: "production"
+    metrics_path: /metrics
+    scheme: http

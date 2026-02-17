@@ -1,0 +1,78 @@
+version: "3.9"
+
+services:
+  # ── HFT Engine ──────────────────────────────────────────────────────
+  polymarket-hft:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: polymarket-hft
+    restart: unless-stopped
+    ports:
+      - "9090:9090" # Prometheus metrics
+      - "3333:3333" # API / health check
+    env_file:
+      - .env.production
+    environment:
+      - RUST_LOG=info
+      - APP_CONFIG_PATH=/home/hft/config/default.toml
+      - APP__MONITORING__PROMETHEUS_LISTEN=0.0.0.0:9090
+    volumes:
+      - hft-data:/home/hft/data
+    networks:
+      - hft-net
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3333/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+
+  # ── Prometheus ──────────────────────────────────────────────────────
+  prometheus:
+    image: prom/prometheus:v2.50.1
+    container_name: prometheus
+    restart: unless-stopped
+    ports:
+      - "9091:9090"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus-data:/prometheus
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yml"
+      - "--storage.tsdb.retention.time=30d"
+      - "--web.enable-lifecycle"
+    networks:
+      - hft-net
+    depends_on:
+      polymarket-hft:
+        condition: service_healthy
+
+  # ── Grafana ─────────────────────────────────────────────────────────
+  grafana:
+    image: grafana/grafana:10.3.3
+    container_name: grafana
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=polymarket
+      - GF_USERS_ALLOW_SIGN_UP=false
+    volumes:
+      - grafana-data:/var/lib/grafana
+      - ./grafana/provisioning:/etc/grafana/provisioning:ro
+      - ./grafana/dashboards:/var/lib/grafana/dashboards:ro
+    networks:
+      - hft-net
+    depends_on:
+      - prometheus
+
+volumes:
+  hft-data:
+  prometheus-data:
+  grafana-data:
+
+networks:
+  hft-net:
+    driver: bridge

@@ -1,0 +1,46 @@
+[package]
+name = "polymarket-hft"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+tokio = { version = "1", features = ["rt-multi-thread", "sync", "time", "net", "macros"] }
+tokio-tungstenite = { version = "0.28", features = ["native-tls"] }
+futures-util = "0.3"
+reqwest = { version = "0.12", features = ["json", "rustls-tls"], default-features = false }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+ethers = { version = "2", features = ["abigen"] }
+config = "0.14"
+dotenvy = "0.15"
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter", "json"] }
+metrics = "0.21"
+metrics-exporter-prometheus = "0.13"
+crossbeam-channel = "0.5"
+dashmap = "5"
+parking_lot = "0.12"
+anyhow = "1"
+thiserror = "1"
+rust_decimal = { version = "1", features = ["serde", "serde-with-str"] }
+rust_decimal_macros = "1"
+chrono = { version = "0.4", features = ["serde"] }
+uuid = { version = "1", features = ["v4", "serde"] }
+hmac = "0.12"
+sha2 = "0.10"
+base64 = "0.21"
+hex = "0.4"
+tokio-util = { version = "0.7", features = ["rt"] }
+clap = { version = "4", features = ["derive"] }
+csv = "1"
+rand = "0.8"
+
+[dev-dependencies]
+criterion = { version = "0.5", features = ["html_reports"] }
+mockito = "1"
+tokio-test = "0.4"
+tempfile = "3"
+
+[[bench]]
+name = "hot_path"
+harness = false

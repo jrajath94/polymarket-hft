@@ -1,0 +1,13 @@
+target/
+.git/
+.env
+.env.local
+.env.production
+*.swp
+*.swo
+*~
+.DS_Store
+backtest_report.csv
+grafana/
+prometheus.yml
+docker-compose.yml

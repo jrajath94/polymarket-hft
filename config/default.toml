@@ -1,0 +1,76 @@
+[app]
+name = "polymarket-hft"
+environment = "development"
+
+[api]
+clob_url = "https://clob.polymarket.com"
+gamma_url = "https://gamma-api.polymarket.com"
+data_api_url = "https://data-api.polymarket.com"
+rtds_url = "wss://ws-live-data.polymarket.com"
+sports_url = "wss://sports-api.polymarket.com/ws"
+
+[ws]
+market_subscribe_url = "wss://ws-subscriptions-clob.polymarket.com/ws/market"
+user_subscribe_url = "wss://ws-subscriptions-clob.polymarket.com/ws/user"
+heartbeat_interval_secs = 10
+reconnect_delay_ms = 1000
+max_reconnect_attempts = 10
+
+[fees]
+# Fee rates by market type (taker fee %)
+crypto_5m_taker = 0.0156
+crypto_15m_taker = 0.0156
+ncaab_taker = 0.0156
+serie_a_taker = 0.0156
+default_taker = 0.0
+maker_rebate_pct = 0.20
+
+[risk]
+# Circuit breaker settings
+max_daily_drawdown = 0.10
+max_consecutive_losses = 3
+ws_stale_threshold_secs = 30
+
+# Kelly sizing
+kelly_fraction = 0.25
+
+# Position limits
+max_single_position_pct = 0.05
+max_portfolio_leverage = 2.0
+
+[rate_limits]
+orders_per_10s = 500
+book_reads_per_10s = 1500
+general_per_10s = 9000
+
+[monitoring]
+prometheus_listen = "127.0.0.1:9090"
+health_check_interval_secs = 5
+metrics_retention_mins = 60
+
+[strategies]
+spread_farming.enabled = true
+spread_farming.min_arb_pct = 0.01
+spread_farming.max_order_size = 100.0
+
+weather.enabled = true
+weather.forecast_days = 5
+weather.revalidate_gridpoint_hours = 24
+
+copy_trade.enabled = true
+copy_trade.velocity_threshold_pct = 2.0
+copy_trade.velocity_window_secs = 10
+copy_trade.dedup_ttl_hours = 1
+
+lp.enabled = false
+lp.post_only = true
+
+penny_longshot.enabled = false
+penny_longshot.min_positions = 20
+penny_longshot.max_positions = 50
+penny_longshot.max_price = 0.05
+
+custom_bot.enabled = false
+custom_bot.rsi_period = 14
+custom_bot.rsi_oversold = 30
+custom_bot.rsi_overbought = 70
