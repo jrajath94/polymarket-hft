@@ -124,7 +124,7 @@ export APP__STRATEGIES__SPREAD_FARMING__ENABLED=true
 ## Key Design Decisions
 
 - **`Decimal` everywhere** -- Never use `f64` for prices. `rust_decimal` with string-based serde.
-- **TDD throughout** -- Every module has `#[cfg(test)]` blocks. CI enforces 100% test pass.
+- **Tested codebase** -- 32 of 49 modules include `#[cfg(test)]` blocks. CI runs full test suite via `cargo test`.
 - **Zero-copy where possible** -- `DashMap` for concurrent orderbook, `crossbeam-channel` for strategy signals.
 - **Circuit breakers** -- Daily drawdown limit, consecutive loss limit, WebSocket staleness detection.
 
