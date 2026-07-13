@@ -70,7 +70,7 @@ Production-grade high-frequency trading engine for [Polymarket](https://polymark
 
 ### Prerequisites
 
-- Rust 1.75+ (stable)
+- Rust (stable)
 - Polymarket L2 API credentials
 - (Optional) NOAA API key for weather strategy
 
