@@ -34,11 +34,11 @@ Risk Engine (parallel):
   - PositionTracker enforces per-market and portfolio limits
 ```
 
-## Latency Budget
+## Latency Design Target
 
-Target: **< 5ms** order-to-wire for spread farming on local orderbook cache hit.
+The engine is architected to minimize latency through lock-free hot paths and efficient data structures. Component-level targets are:
 
-| Component | Budget | Notes |
+| Component | Target | Notes |
 |-----------|--------|-------|
 | Orderbook lookup | < 100us | DashMap read, no allocation |
 | Fee calculation | < 50us | Decimal arithmetic |
@@ -46,7 +46,9 @@ Target: **< 5ms** order-to-wire for spread farming on local orderbook cache hit.
 | Rate limit check | < 10us | Atomic counter |
 | Order signing (EIP-712) | < 2ms | ECDSA signature |
 | HTTP POST to CLOB | < 3ms | Pre-warmed connection pool |
-| **Total** | **< 5ms** | Excluding network RTT to PM |
+| **Cumulative target** | **< 5ms** | Design goal; excludes network RTT to PM |
+
+Note: Actual latency depends on network conditions, system load, and market data freshness. Benchmarks are measured in Phase 8.
 
 ## Module Dependency Graph
 

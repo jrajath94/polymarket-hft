@@ -1,6 +1,6 @@
 # Polymarket HFT Trading Engine
 
-Production-grade high-frequency trading engine for [Polymarket](https://polymarket.com) prediction markets. Built in Rust with async/await, targeting sub-millisecond order-to-wire latency.
+Production-grade high-frequency trading engine for [Polymarket](https://polymarket.com) prediction markets. Built in Rust with async/await.
 
 ## Architecture
 
